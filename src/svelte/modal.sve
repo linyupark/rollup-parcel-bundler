@@ -1,0 +1,72 @@
+<style>
+  .modal {
+    width: 600px;
+    height: 300px;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #666;
+    display: none;
+    overflow: auto;
+  }
+  .modal.show {
+    display: block;
+    position: fixed;
+    top: 10%;
+    left: 0;
+    right: 0;
+  }
+  .modal .content {
+    height: 200px;
+    margin: 5px;
+    border: 1px solid #eee;
+    overflow: auto;
+  }
+  .modal .content .demo {
+    height: 1000px;
+  }
+</style>
+
+<svelte:window on:mousewheel="set({ scrollEvent: event })"/>
+<div class="modal {visible?'show':''}">
+  <div class="content" on:mousewheel="contentScroll(event)">
+    <div class="demo">
+      <p>2</p><p>2</p><p>2</p><p>2</p><p>2</p><p>2</p><p>2</p><p>2</p><p>2</p><p>2</p><p>2</p><p>2</p><p>2</p><p>2</p><p>2</p><p>2</p><p>2</p><p>2</p><p>2</p><p>2</p><p>2</p><p>2</p><p>2</p><p>2</p><p>2</p><p>2</p><p>2</p><p>2</p><p>2</p><p>2</p><p>2</p><p>2</p><p>2</p><p>2</p>
+    </div>
+  </div>
+  <p>
+    <button on:click="set({ visible: false })">close!!</button>
+  </p>
+</div>
+
+<script>
+  export default {
+    onstate({ changed, current, previous }) {
+      if(current.visible && current.scrollEvent) {
+        current.scrollEvent.preventDefault();
+      }
+      if(!current.visible) {
+        document.querySelector('.content').scrollTop = 0;
+      }
+    },
+    oncreate() {
+      
+    },
+    onupdate({ changed, current, previous }) {},
+    ondestroy() {},
+    data() {
+      return {
+        visible: true,
+        scrollEvent: null
+      }
+    },
+    methods: {
+      contentScroll(event) {
+        const content = document.querySelector('.content');
+        content.scrollTop += event.deltaY;
+      },
+    },
+    computed: {},
+    helpers: {},
+    components: {}
+  }
+</script>
