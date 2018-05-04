@@ -43,7 +43,7 @@ const inputOpts = {
     }),
     svelte({
       extensions: ['.sve'],
-      include: './src/svelte/**/*.sve',
+      include: './src/**/*.sve',
       share: true,
       css: function(css) {
         css.write('./src/assets/svelte.bundle.css', false);
@@ -82,7 +82,7 @@ rollup
   .watch({
     ...inputOpts,
     output: [outputOpts],
-    include: ['./src/svelte/**/*.sve']
+    include: ['./src/**/*.sve']
   })
   .on('event', async event => {
     if (event.code === 'START') {
